@@ -1,0 +1,70 @@
+#package the chaincode
+<!-- peer lifecycle chaincode package tar-file-path  -p path  --label label 
+-l language -->
+
+
+
+<!-- export CORE_PEER_LISTENADDRESS=localhost:7051
+export CORE_PEER_ADDRESS=localhost:7051
+
+
+# Change this to folder for managing the ledger
+# You may use the following to point to the current folder
+# Be aware that GoLevelDB does not work well with mounted file systems so you may see
+# errors in using the folder that is on host system.
+export CORE_PEER_FILESYSTEMPATH=$HOME/ledgers/simple-two-orgs/peer/ledger
+
+# Identity set to Admin
+export CORE_PEER_MSPCONFIGPATH=$CONFIG_DIRECTORY/crypto-config/peerOrganizations/acme.com/users/Admin@acme.com/msp
+
+
+# State Data persistence in CouchDB
+CORE_LEDGER_STATE_STATEDATABASE=goleveldb
+# For Couch DB
+# CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=localhost:5984
+#CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
+#CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=
+
+export NODECHAINCODE=/vagrant/nodechaincode -->
+
+export CC_NAME=gocc
+export CC_VERSION=1.0
+export CC_LABEL="$CC_NAME.$CC_VERSION-1.0"
+export CC_PACKAGE_FILE=$HOME/packages/$CC_LABEL.tar.gz
+
+
+mkdir -p $HOME/packages
+
+
+export  CONFIG_DIRECTORY=$PWD/automobile/client/excise
+<!-- export  CONFIG_DIRECTORY=$PWD/automobile/client/fbr -->
+export CORE_PEER_MSPCONFIGPATH=$CONFIG_DIRECTORY/admin/msp
+export FABRIC_CFG_PATH=$CONFIG_DIRECTORY
+export FABRIC_LOGGING_SPEC=INFO
+
+peer lifecycle chaincode package $CC_PACKAGE_FILE --label $CC_LABEL -p supplychain
+
+<!-- check package folder -->
+ls -la $CC_PACKAGE_FILE
+
+
+peer lifecycle chaincode install $CC_PACKAGE_FILE
+
+
+1. Get the package ID
+peer lifecycle chaincode queryinstalled
+
+CC_PACKAGE_ID=gocc.1.0-1.0:4dd16a9aea9bee85dc25167a5ddc45f7f840a1976c6f037f0933c32297cda7f9
+
+peer lifecycle chaincode approveformyorg -n gocc -v 1.0 -C  automobilechannel --sequence 1  --init-required --package-id $CC_PACKAGE_ID
+
+
+Check Commit Readiness
+peer   lifecycle   chaincode   checkcommitreadiness -n gocc -v 1.0 -C  automobilechannel --sequence 1 --init-required 
+
+
+4. Commit the chaincode
+peer lifecycle chaincode commit -n gocc -v 1.0 -C automobilechannel --sequence 1 --init-required
+
+5. Check committed
+peer lifecycle chaincode querycommitted -n gocc  -C automobilechannel

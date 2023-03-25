@@ -1,4 +1,4 @@
-CORE_PEER_MSPCONFIGPATH=$PWD/automobile/client/excise/admin/msp
+export CORE_PEER_MSPCONFIGPATH=$PWD/automobile/client/excise/admin/msp
 export FABRIC_CFG_PATH="$PWD/automobile/client/excise"
 # Fetch channel configuration
 # peer channel fetch config $AUTOMOBILE_CHANNEL_BLOCK -o $ORDERER_ADDRESS -c airlinechannel
