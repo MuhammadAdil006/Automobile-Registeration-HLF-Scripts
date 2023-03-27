@@ -45,6 +45,14 @@ Vagrant.configure("2") do |config|
 
     # Fabric CA Server
     config.vm.network "forwarded_port", guest: 7054, host: 7054
+    config.vm.network "forwarded_port", guest: 7055, host: 7055
+    config.vm.network "forwarded_port", guest: 7060, host: 7060
+    config.vm.network "forwarded_port", guest: 7065, host: 7065
+    config.vm.network "forwarded_port", guest: 7085, host: 7085
+    config.vm.network "forwarded_port", guest: 7087, host: 7087
+
+
+
 
     config.vm.network "forwarded_port", guest: 8051, host: 8051
     config.vm.network "forwarded_port", guest: 8052, host: 8052

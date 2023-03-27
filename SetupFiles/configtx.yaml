@@ -228,7 +228,7 @@ Application: &ApplicationDefaults
     Endorsement:
         Type: ImplicitMeta
         # Rule: "MAJORITY Endorsement"
-        Rule: "MAJORITY Endorsement"
+        Rule: "ANY Endorsement"
     Readers:
         Type: ImplicitMeta
         Rule: "ANY Readers"
