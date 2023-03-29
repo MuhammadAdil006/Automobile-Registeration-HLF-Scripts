@@ -14,7 +14,7 @@ export NODECHAINCODE="$PWD/automobile/client/fbr/nodechaincode"
 VAR=$((PORT_NUMBER_BASE))
 export CORE_PEER_FILESYSTEMPATH="$PWD/automobile/client/fbr"
 export PEER_LOGS=$PWD/automobile/excise/fbr-peer
-sudo -E mkdir -p $CORE_PEER_FILESYSTEMPATH
+# sudo -E mkdir -p $CORE_PEER_FILESYSTEMPATH
 
 mkdir -p $PEER_LOGS
 # Start the peer
@@ -49,7 +49,7 @@ export NODECHAINCODE="$PWD/automobile/client/manufacturer/nodechaincode"
 VAR=$((PORT_NUMBER_BASE))
 export CORE_PEER_FILESYSTEMPATH="$PWD/automobile/client/manufacturer"
 export PEER_LOGS=$PWD/automobile/excise/manufacturer-peer
-sudo -E mkdir -p $CORE_PEER_FILESYSTEMPATH
+# sudo -E mkdir -p $CORE_PEER_FILESYSTEMPATH
 
 mkdir -p $PEER_LOGS
 # Start the peer
